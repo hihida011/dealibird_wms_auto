@@ -1,0 +1,52 @@
+XPATH 삭제 css -> string 로 수정
+
+메뉴 클릭
+입고 진행 현황 부터 작성
+
+# 입고 관리 ->  이동(230116)
+
+except:
+    wms_test_result = driver.find_elements(By.CSS_SELECTOR,'span.MuiBox-root')
+    for wms_str_loop in wms_test_result:
+        #print(wms_str_loop.text,"\n")
+        if wms_str_loop.text == "입고 진행현황":
+            #print("클릭 시도\n")
+            wms_str_loop.click()
+            #print("클릭 완료\n")
+            break
+
+---------------------------
+버튼
+try:
+    driver.find_element(By.XPATH, '//*[@id="root"]/div/div/div/div/div[2]/div/div/div[1]/div/a[6]').click() # 입고 관리 -> 입고 진행현황 이동
+except:
+    wms_test_result = driver.find_elements(By.CSS_SELECTOR,'span.MuiBox-root')
+    for wms_str_loop in wms_test_result:
+        #print(wms_str_loop.text,"\n")
+        if wms_str_loop.text == "입고 진행현황":
+            #print("클릭 시도\n")
+            wms_str_loop.click()
+            #print("클릭 완료\n")
+            break
+
+---------------------------
+
+특정 문자 가져오기
+
+# (230116)
+time.sleep(3)
+wms_test_result = driver.find_elements(By.CSS_SELECTOR,'h2.MuiTypography-root')
+
+for wms_str_loop in wms_test_result:
+    #print("for 문",wms_str_loop.text,"\n")
+    if "총 주문 수" in wms_str_loop.text:
+       #print("가져오기 시도\n")
+        wms_str_loop_result = wms_str_loop.text
+        #print(wms_str_loop_result, "가져오기 완료\n")
+        break
+
+wms_str_loop_result = wms_str_loop_result.replace(' ', '') # 공백만 제거 하고 배열에 입력
+wms_str_loop_result = wms_str_loop_result.replace("총 주문 수", '') # 나머지 내용 제거
+wms_test_result_check = wms_str_loop_result.replace('개', '') # 나머지 내용 제거
+
+---------------------------
